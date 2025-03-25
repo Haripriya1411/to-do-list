@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>To-Do List</h1>
+        </div>
+        <div class="task-input-container">
+            <input type="text" class="task-input" placeholder="Enter the task">
+            <button class="add-btn"><i class="fas fa-plus"></i></button>
+        </div>
+        <ul class="task-list">
+            <li>
+                <span class="task">Sample Task</span>
+                <div class="actions">
+                    <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addBtn = document.querySelector('.add-btn');
+            const taskInput = document.querySelector('.task-input');
+            const taskList = document.querySelector('.task-list');
+
+            const addTask = () => {
+                const taskText = taskInput.value.trim();
+                if (taskText) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span class="task">${taskText}</span>
+                        <div class="actions">
+                            <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                    taskList.appendChild(li);
+                    taskInput.value = '';
+
+                    li.querySelector('.edit-btn').addEventListener('click', () => {
+                        const taskSpan = li.querySelector('.task');
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.value = taskSpan.textContent;
+                        input.className = 'task-input';
+                        li.replaceChild(input, taskSpan);
+
+                        input.addEventListener('keypress', (e) => {
+                            if (e.key === 'Enter') {
+                                taskSpan.textContent = input.value;
+                                li.replaceChild(taskSpan, input);
+                            }
+                        });
+
+                        input.addEventListener('blur', () => {
+                            taskSpan.textContent = input.value;
+                            li.replaceChild(taskSpan, input);
+                        });
+                    });
+
+                    li.querySelector('.delete-btn').addEventListener('click', () => {
+                        li.querySelector('.task').classList.add('completed');
+                        setTimeout(() => {
+                            taskList.removeChild(li);
+                        }, 500);
+                    });
+                }
+            };
+
+            addBtn.addEventListener('click', addTask);
+            taskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

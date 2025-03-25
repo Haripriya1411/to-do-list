@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, #0a0134 0%, #160147 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    background: linear-gradient(135deg, #5b0468 0%, #0d0447 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+}
+.container::before{
+    content: '';
+    position: absolute;
+    bottom: 21%;
+    right: 30%;
+    width: 160px;
+    height: 160px;
+    background: #7d119e;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: .8;
+}
+.container::after{
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: 32%;
+    width: 120px;
+    height: 120px;
+    background: #8409aa;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: .8;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+}
+.task-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.task-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.task-input-container .add-btn {
+    background: #8409aa;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 40%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.task-list li {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.task-list li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.task-list li .task {
+    flex-grow: 1;
+    text-align: left;
+}
+.task-list li .task.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+.task-list li .actions {
+    display: flex;
+    gap: 10px;
+}
+.task-list li .actions .edit-btn,
+.task-list li .actions .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+.task-list li .actions .edit-btn {
+    color: rgb(8, 0, 12);
+}
+.task-list li .actions .delete-btn {
+    color: red;
+}
